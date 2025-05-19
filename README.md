@@ -6,7 +6,7 @@ A comprehensive collection of configuration files, documentation, and setup guid
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 
-## 🏠 Overview
+## Overview
 
 This repository serves as the central knowledge base and configuration store for my homelab environment. It contains Docker Compose files, configuration templates, setup instructions, and documentation for all services running in my Proxmox environment.
 
@@ -35,7 +35,14 @@ The homelab uses a segmented network approach with different subnets for various
 | Twingate | 10.10.1.x | Zero-trust network access solution |
 | Cloudflare | 10.10.40.x | DNS management, DDoS protection, and reverse proxy |
 
-### Tools & Utilities (Proxmox IDs 200-299)
+### Storage (Proxmox IDs 200-299)
+
+| Service | Subnet | Description |
+|---------|--------|-------------|
+| TrueNAS | 10.10.10.x | Network Attached Storage |
+| Nextcloud | 10.10.40.x | File hosting and productivity suite |
+
+### Tools & Utilities (Proxmox IDs 300-399)
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
@@ -43,15 +50,7 @@ The homelab uses a segmented network approach with different subnets for various
 | Vaultwarden | 10.10.40.x | Self-hosted password manager |
 | Hoarder | 10.10.40.x | File collection and organization |
 | Portainer | 10.10.10.x | Docker/container management |
-| Cockpit | 10.10.10.x | Web-based system administration |
 | VS Code Server | 10.10.10.x | Web-based code editor |
-
-### Storage (Proxmox IDs 300-399)
-
-| Service | Subnet | Description |
-|---------|--------|-------------|
-| TrueNAS | 10.10.10.x | Network Attached Storage |
-| Nextcloud | 10.10.40.x | File hosting and productivity suite |
 
 ### Media (Proxmox IDs 400-499)
 
@@ -88,8 +87,9 @@ The homelab uses a segmented network approach with different subnets for various
 | Grafana | 10.10.10.x | Metrics visualization and dashboards |
 | InfluxDB | 10.10.10.x | Time-series database for metrics |
 | Prometheus | 10.10.10.x | Metrics collection and alerting |
+| Cockpit | 10.10.10.x | Web-based system administration |
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 ├── README.md               # This file
@@ -100,31 +100,10 @@ The homelab uses a segmented network approach with different subnets for various
 ├── smart-home/         	# Smart home services
 └── monitoring/             # Monitoring services
 └── scripts/                # Utility scripts for management
-    ├── backup/             # Backup scripts
-    ├── monitoring/         # Monitoring scripts
     └── automation/         # Automation scripts
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Proxmox VE (version 8)
-- Basic understanding of networking, virtualization, and containerization
-- Network with segmented VLANs (optional but recommended)
-
-### Initial Setup
-
-1. Clone this repository
-   ```bash
-   git clone https://github.com/rusdog/homelab.git
-   ```
-
-2. Review the documentation in the `docs/` directory for specific service setup instructions
-
-3. Customize configurations to match your environment needs
-
-## 🔄 Backup Strategy
+## Backup Strategy
 
 - Daily VM backups via Proxmox backup scheduler
 - Configuration files backed up to git repository
@@ -132,7 +111,7 @@ The homelab uses a segmented network approach with different subnets for various
 
 See the [backup documentation](docs/backup/README.md) for detailed procedures.
 
-## 🛠️ Maintenance
+## Maintenance
 
 Regular maintenance tasks:
 
@@ -145,15 +124,11 @@ Regular maintenance tasks:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📊 Monitoring Dashboard
-
-Access the monitoring dashboard at: http://grafana.local (or use the direct IP: 10.10.10.600)
-
-## 🤝 Contributing
+## Contributing
 
 For personal use, but contributions or suggestions are welcome via issues or pull requests.
 
-## 🔗 Useful Links
+## Useful Links
 
 - [Proxmox Documentation](https://pve.proxmox.com/wiki/Main_Page)
 - [Docker Documentation](https://docs.docker.com/)
