@@ -89,6 +89,12 @@ The homelab uses a segmented network approach with different subnets for various
 | Prometheus | 10.10.10.x | Metrics collection and alerting |
 | Cockpit | 10.10.10.x | Web-based system administration |
 
+### VM Clones (Proxmox IDs 1000-1099)
+
+| VM Name | VM ID | Description |
+|---------|-------|-------------|
+| debian12 | 1000 | Debian 12 VM w/ initial-debian-12-setup.sh installed |
+
 ## Repository Structure
 
 ```
