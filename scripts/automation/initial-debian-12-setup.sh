@@ -15,18 +15,19 @@ display_help() {
     echo "  -h, --help    Display this help message and exit."
     echo ""
     echo "SECTIONS (requires 'y' to proceed):"
-    echo "  1. Update System Packages: Updates package lists, upgrades installed packages, and installs qemu-guest-agent."
-    echo "  2. Install and Configure OpenSSH: Installs OpenSSH server and configures it for root login."
-    echo "  3. Install Docker: Installs Docker CE, CLI, containerd, buildx-plugin, and docker-compose-plugin."
-    echo "  4. Network Configuration with Netplan: Configures a static IP address and gateway."
+    echo "  1. Change sudo password."
+    echo "  2. Update System Packages: Updates package lists, upgrades installed packages, and installs qemu-guest-agent."
+    echo "  3. Install and Configure OpenSSH: Installs OpenSSH server and configures it for root login."
+    echo "  4. Install Docker: Installs Docker CE, CLI, containerd, buildx-plugin, and docker-compose-plugin."
+    echo "  5. Network Configuration with Netplan: Configures a static IP address and gateway."
     echo "     - Prompts for static IP and gateway."
     echo "     - Optionally backs up existing netplan configurations."
-    echo "  5. Hostname Configuration: Sets the system hostname."
+    echo "  6. Hostname Configuration: Sets the system hostname."
     echo "     - Prompts for a hostname."
-    echo "  6. Disk resizing: attempts to resize the disk."
+    echo "  7. Disk resizing: attempts to resize the disk."
     echo "     - Prompts for disk to resize."
     echo "     - Prompts for partition to resize."
-    echo "  7. Reboot System: Reboots the system to apply all changes."
+    echo "  8. Reboot System: Reboots the system to apply all changes."
     echo ""
     echo "Example: sudo $0"
     exit 0
@@ -66,7 +67,15 @@ print_info() {
     echo -e "\e[1;33mℹ $1\e[0m"
 }
 
-# 1. Update and upgrade packages
+# 1. Change sudo password
+read -p "Do you want to proceed with changing the root password? (y/n) " confirm_updates
+if [ "$confirm_updates" == "y" ]; then
+    print_section "Changing root password"
+    passwd root
+    print_success "Root password updated successfully"
+fi
+
+# 2. Update and upgrade packages
 read -p "Do you want to proceed with updating system packages? (y/n) " confirm_updates
 if [ "$confirm_updates" == "y" ]; then
     print_section "Updating System Packages"
@@ -79,7 +88,7 @@ if [ "$confirm_updates" == "y" ]; then
     print_success "System packages updated successfully"
 fi
 
-# 2. Install and configure OpenSSH
+# 3. Install and configure OpenSSH
 read -p "Do you want to proceed with installing and configuring OpenSSH? (y/n) " confirm_ssh
 if [ "$confirm_ssh" == "y" ]; then
     print_section "Installing and Configuring OpenSSH"
@@ -92,7 +101,7 @@ if [ "$confirm_ssh" == "y" ]; then
     print_success "OpenSSH installed and configured successfully"
 fi
 
-# 3. Install Docker and Docker Compose
+# 4. Install Docker and Docker Compose
 read -p "Do you want to proceed with installing Docker? (y/n) " confirm_docker_install
 if [ "$confirm_docker_install" == "y" ]; then
 	# Add Docker's official GPG key
@@ -125,7 +134,7 @@ if [ "$confirm_docker_install" == "y" ]; then
     print_success "Docker installed successfully"
 fi
 
-# 4. Configure network with netplan
+# 5. Configure network with netplan
 read -p "Do you want to proceed with configuring the network? (y/n) " confirm_network
 if [ "$confirm_network" == "y" ]; then
     print_section "Network Configuration with Netplan"
@@ -206,7 +215,7 @@ EOF
     print_success "Network configuration applied successfully"
 fi
 
-# 5. Configure hostname
+# 6. Configure hostname
 read -p "Do you want to proceed with configuring the hostname? (y/n) " confirm_hostname
 if [ "$confirm_hostname" == "y" ]; then
     print_section "Hostname Configuration"
@@ -235,7 +244,7 @@ if [ "$confirm_hostname" == "y" ]; then
 	print_success "Hostname configured successfully"
 fi
 
-# 6. Ensure full Disk utilization
+# 7. Ensure full Disk utilization
 read -p "Do you want to proceed with resizing the disk with 'parted'? (y/n) " confirm_parted
 if [ "$confirm_parted" == "y" ]; then
     print_section "Disk Resize Configuration"
