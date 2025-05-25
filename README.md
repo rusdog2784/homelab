@@ -30,17 +30,17 @@ The homelab uses a segmented network approach with different subnets for various
 | Service | Subnet | Description |
 |---------|--------|-------------|
 | OPNsense | 10.10.1.1 | Router/Firewall (physical device) |
-| Pi-hole | 10.10.1.x | Network-wide ad blocking and local DNS |
-| Nginx Proxy Manager | 10.10.1.x | Reverse proxy with SSL management (local only) |
-| Twingate | 10.10.1.x | Zero-trust network access solution |
+| Pi-hole | 10.10.1.100 | Network-wide ad blocking and local DNS |
+| Nginx Proxy Manager | 10.10.1.101 | Reverse proxy with SSL management (local only) |
+| Twingate | 10.10.10.100 | Zero-trust network access solution |
 | Cloudflare | 10.10.40.x | DNS management, DDoS protection, and reverse proxy (external only) |
 
 ### Storage (Proxmox IDs 200-299)
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
-| TrueNAS | 10.10.10.x | Network Attached Storage |
-| Nextcloud | 10.10.40.x | File hosting and productivity suite |
+| TrueNAS | 10.10.10.101 | Network Attached Storage |
+| NextCloud | 10.10.40.x | File hosting and productivity suite |
 
 ### Tools & Utilities (Proxmox IDs 300-399)
 
