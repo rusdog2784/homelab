@@ -23,7 +23,10 @@ display_help() {
     echo "     - Optionally backs up existing netplan configurations."
     echo "  5. Hostname Configuration: Sets the system hostname."
     echo "     - Prompts for a hostname."
-    echo "  6. Reboot System: Reboots the system to apply all changes."
+    echo "  6. Disk resizing: attempts to resize the disk."
+    echo "     - Prompts for disk to resize."
+    echo "     - Prompts for partition to resize."
+    echo "  7. Reboot System: Reboots the system to apply all changes."
     echo ""
     echo "Example: sudo $0"
     exit 0
@@ -230,6 +233,61 @@ if [ "$confirm_hostname" == "y" ]; then
 	sed -i "2i127.0.1.1       $hostname" /etc/hosts || { print_error "Failed to update /etc/hosts"; exit 1; }
 
 	print_success "Hostname configured successfully"
+fi
+
+# 6. Ensure full Disk utilization
+read -p "Do you want to proceed with resizing the disk with 'parted'? (y/n) " confirm_parted
+if [ "$confirm_parted" == "y" ]; then
+    print_section "Disk Resize Configuration"
+
+	# Install parted package
+	apt install -y parted 
+
+    # Show available disks
+	print_info "Available disks:"
+	lsblk -o NAME,SIZE,TYPE,MOUNTPOINT | grep disk
+	echo ""
+
+	# Try to determine the main disk
+	MAIN_DISK=""
+	if [ -b "/dev/sda" ]; then
+		MAIN_DISK="/dev/sda"
+	elif [ -b "/dev/vda" ]; then
+		MAIN_DISK="/dev/vda"
+	elif [ -b "/dev/xvda" ]; then
+		MAIN_DISK="/dev/xvda"
+	elif [ -b "/dev/nvme0n1" ]; then
+		MAIN_DISK="/dev/nvme0n1"
+	fi
+
+	# Ask user to confirm or enter a different disk
+	if [ -n "$MAIN_DISK" ]; then
+		print_info "The main system disk appears to be: $MAIN_DISK"
+		read -p "Would you like to use $MAIN_DISK? (y/n): " response
+		if [[ "$response" =~ ^[Yy]$ ]]; then
+			DISK_TO_RESIZE="$MAIN_DISK"
+		else
+			read -p "Please enter the disk path (e.g., /dev/sda): " DISK_TO_RESIZE
+		fi
+	else
+		read -p "Please enter the disk path (e.g., /dev/sda): " DISK_TO_RESIZE
+	fi
+
+	# Validate that the disk exists
+	if [ ! -b "$DISK_TO_RESIZE" ]; then
+		print_error "The disk $DISK_TO_RESIZE does not exist. Exiting."
+		exit 1
+	fi
+
+	# Default to partition 1 with option to change
+	PARTITION_NUMBER=1
+	read -p "Enter partition number to resize [1]: " input_partition
+	[ -n "$input_partition" ] && PARTITION_NUMBER=$input_partition
+
+	# Attempt to resize
+	parted $DISK_TO_RESIZE resizepart $PARTITION_NUMBER 100%
+
+	print_success "Disk resized successfully"
 fi
 
 # Final summary

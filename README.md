@@ -33,7 +33,7 @@ The homelab uses a segmented network approach with different subnets for various
 | Pi-hole | 10.10.1.x | Network-wide ad blocking and local DNS |
 | Nginx Proxy Manager | 10.10.1.x | Reverse proxy with SSL management (local only) |
 | Twingate | 10.10.1.x | Zero-trust network access solution |
-| Cloudflare | 10.10.40.x | DNS management, DDoS protection, and reverse proxy |
+| Cloudflare | 10.10.40.x | DNS management, DDoS protection, and reverse proxy (external only) |
 
 ### Storage (Proxmox IDs 200-299)
 
