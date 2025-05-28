@@ -43,29 +43,13 @@ The homelab uses a segmented network approach with different subnets for various
 | TrueNAS | 10.10.10.101 | Network Attached Storage |
 | NextCloud | 10.10.40.x | File hosting and productivity suite |
 
-### Tools & Utilities (Proxmox IDs 300-399)
-
-| Service | Subnet | Description |
-|---------|--------|-------------|
-| Omada | 10.10.1.x | TP-Link network controller (physical) |
-| Vaultwarden | 10.10.40.x | Self-hosted password manager |
-| Hoarder | 10.10.40.x | File collection and organization |
-| Portainer | 10.10.10.x | Docker/container management |
-| VS Code Server | 10.10.10.x | Web-based code editor |
-
-### Media (Proxmox IDs 400-499)
+### Media (Proxmox IDs 300-399)
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
 | Immich | 10.10.40.x | Self-hosted photo and video backup |
 | Plex | 10.10.40.x | Media server for movies and TV shows |
 | Tautulli | 10.10.10.x | Plex monitoring and statistics |
-
-### Media Management (Proxmox IDs 500-599)
-
-| Service | Subnet | Description |
-|---------|--------|-------------|
-| Homarr | 10.10.40.x | Dashboard for services |
 | Overseerr | 10.10.40.x | Media request management |
 | Radarr | 10.10.40.x | Movie collection management |
 | Sonarr | 10.10.40.x | TV show collection management |
@@ -73,7 +57,17 @@ The homelab uses a segmented network approach with different subnets for various
 | Prowlarr | 10.10.40.x | Indexer management |
 | qBittorrent | 10.10.40.x | Download manager |
 
-### Smart Home & Automation (Proxmox IDs 600-699)
+### Tools & Utilities (Proxmox IDs 400-499)
+
+| Service | Subnet | Description |
+|---------|--------|-------------|
+| <dashboard service> | 10.10.10.x | https://www.reddit.com/r/selfhosted/comments/17sly19/dashy_fenrus_flame_heimdall_homarr_homepage_homer/ |
+| Vaultwarden | 10.10.40.x | Self-hosted password manager |
+| Hoarder | 10.10.40.x | File collection and organization |
+| Portainer | 10.10.10.x | Docker/container management |
+| VS Code Server | 10.10.10.x | Web-based code editor |
+
+### Smart Home & Automation (Proxmox IDs 500-599)
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
@@ -81,7 +75,7 @@ The homelab uses a segmented network approach with different subnets for various
 | Frigate NVR | 10.10.10.x | Network video recorder with object detection |
 | Zigbee2MQTT | 10.10.20.x | Zigbee device integration bridge |
 
-### Data & Monitoring (Proxmox IDs 700-799)
+### Data & Monitoring (Proxmox IDs 600-699)
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
@@ -100,6 +94,7 @@ The homelab uses a segmented network approach with different subnets for various
 
 ```
 ├── README.md               # This file
+├── documentation/			# Written documentation for homelab things
 ├── networking/         	# Networking services
 ├── tools-and-utilities/    # Utility services
 ├── storage/            	# Storage services
@@ -107,7 +102,6 @@ The homelab uses a segmented network approach with different subnets for various
 ├── smart-home/         	# Smart home services
 └── monitoring/             # Monitoring services
 └── scripts/                # Utility scripts for management
-    └── automation/         # Automation scripts
 ```
 
 ## Backup Strategy

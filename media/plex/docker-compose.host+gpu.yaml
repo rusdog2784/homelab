@@ -1,0 +1,28 @@
+# Plex Pass Subscription is REQUIRED to use Hardware Acceleration
+
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    runtime: nvidia
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+    environment:
+      - TZ=America/Denver
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=<Retrieve token from https://account.plex.tv/en/claim>
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+
+    volumes:
+      - /mnt/plex-media:/data
+      - ./config:/config
+      - ./transcode:/transcode
