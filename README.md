@@ -61,7 +61,7 @@ The homelab uses a segmented network approach with different subnets for various
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
-| <dashboard service> | 10.10.10.x | https://www.reddit.com/r/selfhosted/comments/17sly19/dashy_fenrus_flame_heimdall_homarr_homepage_homer/ |
+| {some dashboard service} | 10.10.10.x | https://www.reddit.com/r/selfhosted/comments/17sly19/dashy_fenrus_flame_heimdall_homarr_homepage_homer/ |
 | Vaultwarden | 10.10.40.x | Self-hosted password manager |
 | Hoarder | 10.10.40.x | File collection and organization |
 | Portainer | 10.10.10.x | Docker/container management |
