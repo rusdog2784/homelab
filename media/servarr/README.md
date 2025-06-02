@@ -55,7 +55,7 @@ servarr-services/
 ├── .env
 ├── README.md
 ├── bazarr/config/
-├── flare-bypasser/ (contains Dockerfile)
+├── flare-bypasser/ (https://github.com/yoori/flare-bypasser.git)
 ├── gluetun/
 ├── lidarr/config/
 ├── prowlarr/config/
@@ -67,7 +67,7 @@ servarr-services/
 
 ## Configuration
 
-1. **Create the `.env` file** with the following variables:
+1. **Create the `.env` file** with the following variables (or copy and modify the `example.env` file):
    ```env
    PUID=1000
    PGID=1000
