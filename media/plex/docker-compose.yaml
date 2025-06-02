@@ -1,0 +1,64 @@
+# Media Services Stack
+# Directory: media-services/
+# Get your Plex Claim Token from here: https://account.plex.tv/en/claim
+
+name: mediastack
+
+services:
+  plex:
+    container_name: plex
+    image: lscr.io/linuxserver/plex:latest
+    restart: unless-stopped
+    runtime: nvidia
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - TZ=America/Denver
+      - PLEX_CLAIM=<COPY PASTE CLAIM TOKEN FROM https://account.plex.tv/en/claim>
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+    volumes:
+      - /mnt/plex-media:/data
+      - ./plex/config:/config
+      - ./plex/transcode:/transcode
+
+  overseerr:
+    container_name: overseerr
+    image: lscr.io/linuxserver/overseerr:latest
+    restart: unless-stopped
+    networks:
+      - media-network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Denver
+    volumes:
+      - ./overseer/config:/config
+    ports:
+      - 5055:5055
+
+  tautulli:
+    container_name: tautulli
+    image: lscr.io/linuxserver/tautulli:latest
+    restart: unless-stopped
+    networks:
+      - media-network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Denver
+    volumes:
+      - ./tautulli:/config
+    ports:
+      - 8181:8181
+
+networks:
+  media-network:
+    driver: bridge

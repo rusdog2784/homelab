@@ -28,7 +28,7 @@ The homelab uses a segmented network approach with different subnets for various
 ### Networking (Proxmox IDs 100-199)
 
 | Service | Subnet | Description |
-|---------|--------|-------------|
+|----------|--------|-------------|
 | OPNsense | 10.10.1.1 | Router/Firewall (physical device) |
 | Pi-hole | 10.10.1.100 | Network-wide ad blocking and local DNS |
 | Nginx Proxy Manager (npm) | 10.10.1.101 | Reverse proxy with SSL management (local only) |
@@ -48,14 +48,14 @@ The homelab uses a segmented network approach with different subnets for various
 | Service | Subnet | Description |
 |---------|--------|-------------|
 | Immich | 10.10.40.x | Self-hosted photo and video backup |
-| Plex | 10.10.40.x | Media server for movies and TV shows |
-| Tautulli | 10.10.10.x | Plex monitoring and statistics |
-| Overseerr | 10.10.40.x | Media request management |
-| Radarr | 10.10.40.x | Movie collection management |
-| Sonarr | 10.10.40.x | TV show collection management |
-| Bazarr | 10.10.40.x | Subtitle management |
-| Prowlarr | 10.10.40.x | Indexer management |
-| qBittorrent | 10.10.40.x | Download manager |
+| Plex | 10.10.40.100 | Media server for movies and TV shows |
+| Tautulli | 10.10.40.100 | Plex monitoring and statistics |
+| Overseerr | 10.40.40.100 | Media request management |
+| Radarr | 10.10.40.101 | Movie collection management |
+| Sonarr | 10.10.40.101 | TV show collection management |
+| Bazarr | 10.10.40.101 | Subtitle management |
+| Prowlarr | 10.10.40.101 | Indexer management |
+| qBittorrent | 10.10.40.101 | Download manager |
 
 ### Tools & Utilities (Proxmox IDs 400-499)
 
