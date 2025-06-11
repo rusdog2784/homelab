@@ -213,45 +213,16 @@ services:
     ports:
       - 6767:6767
 
-  flaresolverr:
-    container_name: flaresolverr
-    # image: ghcr.io/flaresolverr/flaresolverr:latest
-    image: 21hsmw/flaresolverr:nodriver
+  byparr:  # https://github.com/ThePhaseless/Byparr
+    container_name: byparr
+    image: ghcr.io/thephaseless/byparr:latest
     restart: unless-stopped
     networks:
       servarrnetwork:
         ipv4_address: 192.168.0.7
-    environment:
-      - TZ=${TZ}
-      - LOG_LEVEL=info
-      - LOG_HTML=false
-      - CAPTCHA_SOLVER=none
+    shm_size: 2gb
     ports:
       - 8191:8191
-
-  flare-bypasser:
-    networks:
-      servarrnetwork:
-        ipv4_address: 192.168.0.8
-    build:
-      args:
-        #CHROME_VERSION: '131.'
-        UID: 1000
-        CHROME_DISABLE_GPU: true
-        # CHECK_SYSTEM: true
-        # PYTHON_VERSION: 3.11
-      context: flare-bypasser
-      dockerfile: Dockerfile
-    environment:
-      UNUSED: "false"
-      # FORKS: "5:3" #< Uncomment if you work with sites with ustable challenge loading (start additional 3 forks after 5 seconds).
-      DEBUG: "false"
-      VERBOSE: "false"
-      SAVE_CHALLENGE_SCREENSHOTS: "false"
-    container_name: flare-bypasser
-    image: flare-bypasser:latest
-    ports:
-      - 20080:8080
 
 # Newer additions to this stack feel. Remove the '#' to add the service.
 #

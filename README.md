@@ -32,7 +32,7 @@ The homelab uses a segmented network approach with different subnets for various
 | OPNsense | 10.10.1.1 | Router/Firewall (physical device) |
 | Pi-hole | 10.10.1.100 | Network-wide ad blocking and local DNS |
 | Nginx Proxy Manager (npm) | 10.10.1.101 | Reverse proxy with SSL management (local only) |
-| Twingate | 10.10.10.100 | Zero-trust network access solution |
+| Twingate | 10.10.1.102 | Zero-trust network access solution |
 | Omada Controller | 10.10.1.5 | TPLink Omada Controller for Wi-Fi access points and other TPLink devices |
 | Cloudflare | 10.10.40.x | DNS management, DDoS protection, and reverse proxy (external only) |
 
@@ -88,7 +88,7 @@ The homelab uses a segmented network approach with different subnets for various
 
 | VM Name | VM ID | Description |
 |---------|-------|-------------|
-| debian12 | 1000 | Debian 12 VM w/ initial-debian-12-setup.sh installed |
+| debian12 | 1001 | Debian 12 VM w/ initial-debian-12-setup.sh installed |
 
 ## Repository Structure
 

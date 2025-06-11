@@ -17,8 +17,7 @@ A comprehensive Docker-based media management stack featuring automated media ac
 - **Bazarr** - Subtitle management and automation
 
 ### Support Services
-- **FlareSolverr** - Proxy server that solves Cloudflare challenges and CAPTCHAs for indexers
-- **Flare Bypasser** - Alternative Cloudflare challenge solver with enhanced capabilities
+- **Byparr** - Proxy server that solves Cloudflare challenges and CAPTCHAs for indexers (https://github.com/ThePhaseless/Byparr)
 - **Deunhealth** - Container health monitoring and management service
 
 ## Prerequisites
@@ -39,8 +38,7 @@ A comprehensive Docker-based media management stack featuring automated media ac
 - **Sonarr**: 8989
 - **Lidarr**: 8686
 - **Bazarr**: 6767
-- **FlareSolverr**: 8191
-- **Flare Bypasser**: 20080
+- **Byparr**: 8191
 
 ### VPN-Protected Services (via Gluetun)
 - **qBittorrent**: 8080
@@ -55,7 +53,6 @@ servarr-services/
 ├── .env
 ├── README.md
 ├── bazarr/config/
-├── flare-bypasser/ (https://github.com/yoori/flare-bypasser.git)
 ├── gluetun/
 ├── lidarr/config/
 ├── prowlarr/config/
@@ -98,8 +95,7 @@ The stack uses a custom network (`servarrnetwork`) with subnet `192.168.0.0/24` 
 - **Radarr**: 192.168.0.4
 - **Lidarr**: 192.168.0.5
 - **Bazarr**: 192.168.0.6
-- **FlareSolverr**: 192.168.0.7
-- **Flare Bypasser**: 192.168.0.8
+- **Byparr**: 192.168.0.7
 
 **VPN-Routed Services:**
 VPN-dependent services (qBittorrent, Prowlarr, Speedtest Tracker) use `network_mode: service:gluetun` and are accessible via Gluetun's IP (192.168.0.2).
@@ -120,8 +116,7 @@ When configuring services to communicate with each other:
 
 ### Cloudflare Challenge Solvers
 Configure in Prowlarr for indexers requiring challenge solving:
-- **FlareSolverr**: `http://192.168.0.7:8191`
-- **Flare Bypasser**: `http://192.168.0.8:8080`
+- **Byparr**: `http://192.168.0.7:8191`
 
 ## Data Storage
 
@@ -150,8 +145,8 @@ docker-compose pull
 docker-compose up -d
 
 # Rebuild custom images (flare-bypasser)
-docker-compose build flare-bypasser
-docker-compose up -d flare-bypasser
+docker-compose build byparr
+docker-compose up -d byparr
 
 # Check VPN connection
 docker-compose exec gluetun curl ifconfig.me
