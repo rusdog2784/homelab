@@ -61,7 +61,7 @@ The homelab uses a segmented network approach with different subnets for various
 
 | Service | Subnet | Description |
 |---------|--------|-------------|
-| {some dashboard service} | 10.10.10.x | https://www.reddit.com/r/selfhosted/comments/17sly19/dashy_fenrus_flame_heimdall_homarr_homepage_homer/ |
+| Homepage | 10.10.10.102 | A modern, fully static, fast, secure fully proxied, highly customizable application dashboard (https://gethomepage.dev/) |
 | Vaultwarden | 10.10.40.x | Self-hosted password manager |
 | Hoarder | 10.10.40.x | File collection and organization |
 | Portainer | 10.10.10.x | Docker/container management |
@@ -95,13 +95,21 @@ The homelab uses a segmented network approach with different subnets for various
 ```
 ├── README.md               # This file
 ├── documentation/			# Written documentation for homelab things
+│   ├── GPU Passthrough.md  # Guide for GPU passthrough setup
+│   └── PiHole Automated Backup Setup Guide.md # Guide for setting up Pi-hole automated backups
 ├── networking/         	# Networking services
 ├── tools-and-utilities/    # Utility services
 ├── storage/            	# Storage services
 ├── media/               	# Media services
+│   ├── plex/               # Plex media server configuration
+│   └── servarr/            # Media management stack (Radarr, Sonarr, etc.)
 ├── smart-home/         	# Smart home services
-└── monitoring/             # Monitoring services
+├── monitoring/             # Monitoring services
 └── scripts/                # Utility scripts for management
+    ├── initial-debian-12-setup.sh    # Initial setup script for Debian 12 VMs
+    ├── pihole-backup-script.sh       # Automated backup script for Pi-hole
+    ├── resize-vm-partition.sh        # Script to resize VM partitions
+    └── user-creation-script.sh       # Script to create users with customizable settings
 ```
 
 ## Backup Strategy
@@ -109,6 +117,7 @@ The homelab uses a segmented network approach with different subnets for various
 - Daily VM backups via Proxmox backup scheduler
 - Configuration files backed up to git repository
 - Critical data backed up to multiple locations (local and cloud)
+- Automated Pi-hole backups to TrueNAS (see [Pi-hole Backup Guide](documentation/PiHole%20Automated%20Backup%20Setup%20Guide.md))
 
 See the [backup documentation](docs/backup/README.md) for detailed procedures.
 
@@ -120,6 +129,15 @@ Regular maintenance tasks:
 - Application updates (as needed)
 - Security audits (quarterly)
 - Performance monitoring (continuous)
+
+### Utility Scripts
+
+The repository includes several utility scripts to help with maintenance and setup:
+
+- **initial-debian-12-setup.sh**: Initial setup script for Debian 12 VMs
+- **user-creation-script.sh**: Creates users with SSH access and Docker group membership
+- **pihole-backup-script.sh**: Automates Pi-hole configuration backups to TrueNAS
+- **resize-vm-partition.sh**: Helps resize VM partitions when needed
 
 ## 📝 License
 
