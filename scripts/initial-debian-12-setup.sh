@@ -163,6 +163,18 @@ if [ "$confirm_network" == "y" ]; then
 		exit 1
 	fi
 
+	# Ask for secondary DNS server (optional)
+	echo -e "\nPlease provide a secondary DNS server (optional, press enter to skip):"
+	read secondary_dns
+
+	# Validate secondary DNS if provided
+	if [ -n "$secondary_dns" ]; then
+		if [[ ! $secondary_dns =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+			print_error "Invalid secondary DNS server format"
+			exit 1
+		fi
+	fi
+
 	# Ask for gateway address with default value
 	echo -e "\nPlease provide a gateway address (default: $default_gateway):"
 	read gateway
@@ -176,6 +188,9 @@ if [ "$confirm_network" == "y" ]; then
 
 	print_info "Static IP: $static_ip"
 	print_info "DNS Server: $dns_server"
+	if [ -n "$secondary_dns" ]; then
+		print_info "Secondary DNS Server: $secondary_dns"
+	fi
 	print_info "Gateway: $gateway"
 
 	# Backup existing netplan configurations
@@ -201,6 +216,7 @@ network:
       nameservers:
         addresses:
         - ${dns_server}
+${secondary_dns:+- ${secondary_dns}}
       routes:
         - to: default
           via: ${gateway}
